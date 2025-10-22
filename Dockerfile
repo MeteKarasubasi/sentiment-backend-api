@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
 # Copy csproj and restore dependencies from backend folder
-COPY backend/*.csproj ./
+COPY backend/backend.csproj ./
 RUN dotnet restore
 
 # Copy everything else from backend folder and build
