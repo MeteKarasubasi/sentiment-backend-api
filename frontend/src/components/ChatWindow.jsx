@@ -11,6 +11,12 @@ function ChatWindow({ rumuz, room, onLogout, onLeaveRoom }) {
 
   // Fetch messages on component mount and set up polling
   useEffect(() => {
+    if (!room || !room.id) {
+      console.error('ChatWindow: Invalid room data', room);
+      setError('Oda bilgisi geçersiz');
+      return;
+    }
+
     fetchMessages();
     
     // Poll for new messages every 3 seconds
@@ -20,7 +26,7 @@ function ChatWindow({ rumuz, room, onLogout, onLeaveRoom }) {
     
     // Cleanup interval on unmount
     return () => clearInterval(pollInterval);
-  }, [room.id]);
+  }, [room?.id]);
 
   const fetchMessages = async (isBackgroundFetch = false) => {
     try {

@@ -58,7 +58,14 @@ function RoomSelection({ rumuz, onRoomJoined, onLogout }) {
 
     try {
       const response = await api.createRoom(newRoomName.trim(), newRoomPassword, rumuz);
-      onRoomJoined(response.data);
+      console.log('Create room response:', response.data);
+      // Handle different response formats
+      const roomData = response.data?.room || response.data;
+      if (roomData && roomData.id) {
+        onRoomJoined(roomData);
+      } else {
+        setError('Oda oluşturuldu ancak bilgiler alınamadı');
+      }
     } catch (err) {
       if (err.response?.status === 409) {
         setError('Bu oda adı zaten kullanılıyor');
@@ -84,7 +91,14 @@ function RoomSelection({ rumuz, onRoomJoined, onLogout }) {
 
     try {
       const response = await api.joinRoom(selectedRoom.name, joinPassword, rumuz);
-      onRoomJoined(response.data);
+      console.log('Join room response:', response.data);
+      // Handle different response formats
+      const roomData = response.data?.room || response.data;
+      if (roomData && roomData.id) {
+        onRoomJoined(roomData);
+      } else {
+        setError('Odaya katılındı ancak bilgiler alınamadı');
+      }
     } catch (err) {
       if (err.response?.status === 401) {
         setError('Yanlış şifre');
