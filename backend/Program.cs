@@ -19,8 +19,8 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(connectionString));
 
-// Configure Sentiment Service (using Gradio Client via Python)
-builder.Services.AddScoped<ISentimentService, GradioSentimentService>();
+// Configure Sentiment Service (using Custom Hugging Face Space)
+builder.Services.AddHttpClient<ISentimentService, CustomSpaceSentimentService>();
 
 // Configure CORS
 builder.Services.AddCors(options =>
