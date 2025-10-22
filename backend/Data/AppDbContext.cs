@@ -12,7 +12,6 @@ public class AppDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Message> Messages { get; set; }
     public DbSet<Room> Rooms { get; set; }
-    public DbSet<RoomMember> RoomMembers { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
