@@ -18,9 +18,9 @@ public class CustomSpaceSentimentService : ISentimentService
         _httpClient = httpClient;
         _logger = logger;
         
-        // Custom Hugging Face Space URL
+        // Custom Sentiment API Wrapper (Render)
         _spaceUrl = configuration["AiService:SpaceUrl"] 
-            ?? "https://mete1923-emotion.hf.space";
+            ?? "https://sentiment-api-wrapper.onrender.com";
         
         _httpClient.Timeout = TimeSpan.FromSeconds(30);
     }

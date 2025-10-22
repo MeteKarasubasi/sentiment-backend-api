@@ -41,10 +41,15 @@ sentiment-chat/
 ## 🚀 Demo Linkleri
 
 ### Çalışır Uygulamalar
-- **Web Chat (Frontend):** [Vercel'de Deploy Edilecek]
-- **Backend API:** [Render'da Deploy Edilecek]
-- **AI Service:** [Hugging Face Spaces'de Çalışıyor]
-- **Mobile APK:** [Build edilecek]
+- **Web Chat (Frontend):** https://sentiment-chat-frontend.vercel.app (Vercel)
+- **Backend API:** https://sentiment-backend-api.onrender.com (Render)
+- **AI Service:** https://huggingface.co/spaces/Mete1923/sentiment-api-wrapper (Hugging Face Spaces)
+- **Mobile APK:** Build edilebilir - `mobile/BUILD_APK.md` dosyasına bakın
+
+### API Endpoints
+- **Health Check:** https://sentiment-backend-api.onrender.com/health
+- **Swagger Docs:** https://sentiment-backend-api.onrender.com/swagger
+- **AI Service Test:** https://huggingface.co/spaces/Mete1923/sentiment-api-wrapper
 
 ## 🛠️ Kullanılan Teknolojiler ve AI Araçları
 
