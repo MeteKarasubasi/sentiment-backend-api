@@ -1,183 +1,320 @@
-# Sentiment Chat - Duygu Analizi ile Sohbet Uygulaması
+# Sentiment Chat - Duygu Analizi Destekli Sohbet Uygulaması
 
-Kullanıcıların mesajlaşarak sohbet edebildiği, yazışmaların AI tarafından duygu analizi yapılarak canlı olarak gösterildiği full-stack web + mobil uygulama.
+Gerçek zamanlı duygu analizi ile çalışan, oda tabanlı sohbet uygulaması. React Web, React Native Mobile, .NET Core API ve Python AI servisi ile geliştirilmiştir.
 
 ## 🎯 Proje Özeti
 
-Bu proje, kullanıcıların rumuz (takma ad) ile kayıt olup mesajlaşabildiği, her mesajın AI tarafından analiz edilerek duygusunun (pozitif/negatif/nötr) belirlendiği bir sohbet platformudur. Tüm servisler ücretsiz platformlarda deploy edilmiştir.
+Bu proje, kullanıcıların şifre korumalı odalarda sohbet edebileceği ve her mesajın otomatik olarak duygu analizi yapılarak pozitif/nötr/negatif olarak etiketlendiği bir chat uygulamasıdır.
 
-## ✨ Özellikler
+## 🏗️ Mimari
 
-- 💬 **Gerçek Zamanlı Mesajlaşma**: Kullanıcılar rumuz ile kayıt olup mesaj gönderebilir
-- 🤖 **AI Duygu Analizi**: Her mesaj otomatik olarak analiz edilir (pozitif/negatif/nötr)
-- 🌐 **Web Uygulaması**: React ile geliştirilmiş responsive web arayüzü
-- 📱 **Mobil Uygulama**: React Native CLI ile geliştirilmiş Android uygulaması
-- 🎨 **Renkli Gösterim**: Duygulara göre renk kodlaması (yeşil/kırmızı/gri)
-- 📊 **Güven Skoru**: Her duygu analizi için güven yüzdesi gösterimi
+```
+┌─────────────────────┐
+│   React Web App     │ ←→ Polling (3s)
+│   (Vercel)          │
+└──────────┬──────────┘
+           │
+           ↓ REST API
+┌─────────────────────┐
+│   .NET Core API     │ ←→ SQLite Database
+│   (Render)          │
+└──────────┬──────────┘
+           │
+           ↓ HTTP Request
+┌─────────────────────┐
+│   Python AI Service │
+│   (HF Spaces)       │ → BERT Sentiment Analysis
+└─────────────────────┘
+```
 
-## 🏗️ Teknoloji Stack'i
-
-### Frontend (Web)
-- **Framework**: React 19 + Vite
-- **HTTP Client**: Axios
-- **Styling**: CSS3
-- **Deployment**: Vercel
-- **Test**: Vitest + React Testing Library
-
-### Frontend (Mobile)
-- **Framework**: React Native 0.82 (CLI)
-- **Navigation**: React Navigation
-- **UI**: React Native Paper
-- **Platform**: Android (APK)
-
-### Backend API
-- **Framework**: .NET Core 8.0 Web API
-- **Database**: SQLite + Entity Framework Core
-- **Deployment**: Render (Free Web Service)
-- **Test**: xUnit
-
-### AI Service
-- **Framework**: Python 3.10 + Gradio
-- **Model**: cardiffnlp/twitter-roberta-base-sentiment (Hugging Face)
-- **Deployment**: Hugging Face Spaces
-- **Libraries**: transformers, torch
-
-## 📁 Proje Yapısı
+## 📁 Klasör Yapısı
 
 ```
 sentiment-chat/
-├── frontend/              # React web uygulaması
-│   ├── src/
-│   │   ├── components/   # UI bileşenleri
-│   │   ├── services/     # API servisleri
-│   │   └── App.jsx       # Ana uygulama
-│   └── package.json
-│
-├── mobile/               # React Native mobil uygulama
-│   ├── src/
-│   │   ├── screens/     # Ekranlar (Login, Chat)
-│   │   ├── components/  # UI bileşenleri
-│   │   └── services/    # API servisleri
-│   ├── android/         # Android build dosyaları
-│   └── package.json
-│
-├── backend/             # .NET Core API
-│   ├── Controllers/     # API endpoint'leri
-│   ├── Models/         # Veri modelleri
-│   ├── Services/       # İş mantığı servisleri
-│   ├── Data/           # Database context
-│   └── Program.cs      # Uygulama giriş noktası
-│
-├── backend.Tests/      # Backend unit testleri
-│   └── *.cs
-│
-└── ai-service/         # Python AI servisi
-    ├── app.py          # Gradio uygulaması
-    └── requirements.txt
+├── frontend/          # React Web Uygulaması (Vite)
+├── mobile/           # React Native CLI Uygulaması
+├── backend/          # .NET Core 8 Web API
+├── ai-service/       # Python Gradio AI Servisi
+└── README.md         # Bu dosya
 ```
 
-## 🚀 Kurulum ve Çalıştırma
+## 🚀 Demo Linkleri
 
-### 1. AI Service (Hugging Face Spaces)
+### Çalışır Uygulamalar
+- **Web Chat (Frontend):** [Vercel'de Deploy Edilecek]
+- **Backend API:** [Render'da Deploy Edilecek]
+- **AI Service:** [Hugging Face Spaces'de Çalışıyor]
+- **Mobile APK:** [Build edilecek]
 
-AI servisi zaten Hugging Face Spaces'te deploy edilmiştir:
-- **URL**: https://huggingface.co/spaces/[your-space-name]
+## 🛠️ Kullanılan Teknolojiler ve AI Araçları
 
-Yerel olarak çalıştırmak için:
+### Frontend (React Web)
+- **Framework:** React 19 + Vite
+- **HTTP Client:** Axios
+- **Styling:** Vanilla CSS
+- **AI Araçları:** 
+  - Kiro AI - Bileşen yapısı ve state yönetimi
+  - GitHub Copilot - CSS styling ve animasyonlar
+- **Elle Yazılan Kod:** API servis fonksiyonları (`frontend/src/services/api.js`)
+
+### Mobile (React Native)
+- **Framework:** React Native CLI
+- **Navigation:** React Navigation
+- **HTTP Client:** Axios
+- **AI Araçları:**
+  - Kiro AI - Ekran bileşenleri ve navigation yapısı
+- **Elle Yazılan Kod:** API entegrasyonu (`mobile/src/services/api.js`)
+
+### Backend (.NET Core)
+- **Framework:** .NET Core 8 Web API
+- **Database:** SQLite + Entity Framework Core
+- **Authentication:** SHA256 Password Hashing
+- **AI Araçları:**
+  - Kiro AI - Controller yapısı ve routing
+  - GitHub Copilot - LINQ sorguları
+- **Elle Yazılan Kod:** 
+  - Database context ve model ilişkileri (`backend/Data/AppDbContext.cs`)
+  - Sentiment service entegrasyonu (`backend/Services/GradioSentimentService.cs`)
+
+### AI Service (Python)
+- **Framework:** Gradio
+- **ML Model:** savasy/bert-base-turkish-sentiment-cased (Hugging Face)
+- **Deployment:** Hugging Face Spaces
+- **AI Araçları:**
+  - Kiro AI - Gradio interface yapısı
+- **Elle Yazılan Kod:** Model yükleme ve inference logic (`ai-service/app.py`)
+
+## 📦 Kurulum
+
+### Gereksinimler
+- Node.js 18+
+- .NET Core 8 SDK
+- Python 3.9+
+- Git
+
+### 1. Repository'yi Klonlayın
+```bash
+git clone <repository-url>
+cd sentiment-chat
+```
+
+### 2. Frontend Kurulumu
+```bash
+cd frontend
+npm install
+cp .env.example .env
+# .env dosyasında VITE_API_URL'i düzenleyin
+npm run dev
+```
+Frontend: http://localhost:5174
+
+### 3. Backend Kurulumu
+```bash
+cd backend
+dotnet restore
+dotnet run
+```
+Backend: http://localhost:5000
+Swagger: http://localhost:5000/swagger
+
+### 4. AI Service Kurulumu
 ```bash
 cd ai-service
 pip install -r requirements.txt
 python app.py
 ```
+AI Service: http://localhost:7860
 
-### 2. Backend API (.NET Core)
-
-**Gereksinimler**: .NET 8.0 SDK
-
-```bash
-cd backend
-
-# Bağımlılıkları yükle
-dotnet restore
-
-# Database migration'ları uygula
-dotnet ef database update
-
-# Uygulamayı çalıştır
-dotnet run
-```
-
-Backend http://localhost:5000 adresinde çalışacaktır.
-
-**Environment Variables**:
-```bash
-AiService__Url=https://your-huggingface-space.hf.space/api/predict
-ConnectionStrings__DefaultConnection=Data Source=chat.db
-```
-
-### 3. Frontend (Web)
-
-**Gereksinimler**: Node.js 20+
-
-```bash
-cd frontend
-
-# Bağımlılıkları yükle
-npm install
-
-# Development server'ı başlat
-npm run dev
-```
-
-Web uygulaması http://localhost:5173 adresinde çalışacaktır.
-
-**Environment Variables** (`.env` dosyası):
-```
-VITE_API_URL=http://localhost:5000
-```
-
-### 4. Mobile (React Native)
-
-**Gereksinimler**: Node.js 20+, JDK 17, Android SDK
-
+### 5. Mobile Kurulumu
 ```bash
 cd mobile
-
-# Bağımlılıkları yükle
 npm install
 
-# Android emulator'da çalıştır
+# Android
 npm run android
 
-# Veya release APK build et
-cd android
-./gradlew assembleRelease
+# iOS (Mac gerekli)
+npm run ios
 ```
 
-APK dosyası: `mobile/android/app/build/outputs/apk/release/app-release.apk`
+## 🎮 Kullanım
 
-## 🌐 Demo Linkleri
+### Web Uygulaması
+1. Tarayıcıda http://localhost:5174 adresini açın
+2. Rumuz (kullanıcı adı) girin
+3. Yeni oda oluşturun veya mevcut odaya katılın
+4. Mesaj gönderin ve duygu analizini görün
 
-- **Web Uygulaması**: https://sentiment-chat-frontend.vercel.app
-- **Backend API**: https://sentiment-chat-backend.onrender.com
-- **AI Service**: https://huggingface.co/spaces/[your-space-name]
-- **API Docs**: https://sentiment-chat-backend.onrender.com/swagger
-- **Mobile APK**: [Download APK](mobile/android/app/build/outputs/apk/release/app-release.apk)
+### Mobil Uygulama
+1. Uygulamayı başlatın
+2. Rumuz girin
+3. Oda seçin
+4. Sohbet edin
 
-## 📖 API Endpoint'leri
+## 📚 Dosya Yapısı ve İşlevleri
+
+### Frontend (`frontend/`)
+
+#### Temel Dosyalar
+- **`src/App.jsx`** - Ana uygulama bileşeni, routing ve state yönetimi
+  - *AI ile yazıldı:* Temel yapı ve state management
+  - *Elle yazıldı:* localStorage entegrasyonu
+  
+- **`src/services/api.js`** - Backend API çağrıları
+  - *Tamamen elle yazıldı* - HTTP istekleri ve error handling
+
+#### Bileşenler (`src/components/`)
+- **`UserLogin.jsx`** - Kullanıcı giriş ekranı
+  - *AI ile yazıldı:* Form yapısı ve validasyon
+  
+- **`RoomSelection.jsx`** - Oda seçimi ve oluşturma
+  - *AI ile yazıldı:* UI bileşenleri
+  - *Elle yazıldı:* Oda katılma logic
+  
+- **`ChatWindow.jsx`** - Ana sohbet ekranı
+  - *AI ile yazıldı:* Temel yapı
+  - *Elle yazıldı:* Polling mekanizması ve mesaj gönderme
+  
+- **`MessageList.jsx`** - Mesaj listesi
+  - *AI ile yazıldı:* Render logic
+  
+- **`MessageItem.jsx`** - Tekil mesaj bileşeni
+  - *AI ile yazıldı:* UI
+  - *Elle yazıldı:* Sentiment badge logic
+  
+- **`MessageInput.jsx`** - Mesaj giriş alanı
+  - *AI ile yazıldı:* Form handling
+
+#### Stiller
+- **`*.css`** - Tüm stil dosyaları
+  - *AI ile yazıldı:* Temel stiller ve layout
+  - *Elle yazıldı:* Animasyonlar ve responsive tasarım
+
+### Backend (`backend/`)
+
+#### Controllers (`Controllers/`)
+- **`UsersController.cs`** - Kullanıcı yönetimi
+  - *AI ile yazıldı:* CRUD operasyonları
+  - *Elle yazıldı:* Validasyon logic
+  
+- **`RoomsController.cs`** - Oda yönetimi
+  - *AI ile yazıldı:* Temel CRUD
+  - *Elle yazıldı:* Şifre hashing ve oda kapatma logic
+  
+- **`MessagesController.cs`** - Mesaj yönetimi
+  - *AI ile yazıldı:* Temel yapı
+  - *Elle yazıldı:* Sentiment service entegrasyonu ve error handling
+
+#### Models (`Models/`)
+- **`User.cs`** - Kullanıcı modeli
+- **`Room.cs`** - Oda modeli
+- **`RoomMember.cs`** - Oda üyelik modeli
+- **`Message.cs`** - Mesaj modeli
+  - *Tümü AI ile yazıldı*
+
+#### Data (`Data/`)
+- **`AppDbContext.cs`** - Entity Framework context
+  - *AI ile yazıldı:* Temel yapı
+  - *Elle yazıldı:* İlişkiler ve index'ler
+
+#### Services (`Services/`)
+- **`ISentimentService.cs`** - Sentiment service interface
+- **`GradioSentimentService.cs`** - Gradio AI service entegrasyonu
+  - *Tamamen elle yazıldı* - HTTP client ve error handling
+  
+- **`HuggingFaceSentimentService.cs`** - Alternatif HF implementation
+  - *Elle yazıldı*
+
+#### Diğer
+- **`Program.cs`** - Uygulama başlangıç noktası
+  - *AI ile yazıldı:* Temel yapı
+  - *Elle yazıldı:* CORS ve database configuration
+
+### AI Service (`ai-service/`)
+
+- **`app.py`** - Gradio uygulaması
+  - *AI ile yazıldı:* Gradio interface
+  - *Elle yazıldı:* Model yükleme ve inference logic
+  
+- **`requirements.txt`** - Python bağımlılıkları
+  - *Elle yazıldı*
+  
+- **`README.md`** - AI servis dokümantasyonu
+  - *Elle yazıldı*
+
+### Mobile (`mobile/`)
+
+#### Screens (`src/screens/`)
+- **`LoginScreen.js`** - Giriş ekranı
+  - *AI ile yazıldı:* UI bileşenleri
+  
+- **`ChatScreen.js`** - Sohbet ekranı
+  - *AI ile yazıldı:* Temel yapı
+  - *Elle yazıldı:* API entegrasyonu
+
+#### Components (`src/components/`)
+- **`MessageList.js`** - Mesaj listesi
+- **`MessageItem.js`** - Mesaj öğesi
+- **`MessageInput.js`** - Mesaj girişi
+  - *AI ile yazıldı*
+
+#### Services (`src/services/`)
+- **`api.js`** - API servisi
+  - *Tamamen elle yazıldı*
+
+## 🔑 Özellikler
+
+### Temel Özellikler
+- ✅ Kullanıcı kaydı (sadece rumuz)
+- ✅ Şifre korumalı oda sistemi
+- ✅ Gerçek zamanlı mesajlaşma (polling)
+- ✅ Otomatik duygu analizi
+- ✅ Mesaj geçmişi
+- ✅ Responsive tasarım
+
+### Gelişmiş Özellikler
+- ✅ Otomatik oda kapatma (son üye ayrılınca)
+- ✅ Görsel mesaj ayrımı (kendi/diğerleri)
+- ✅ Hata yönetimi (AI servisi çalışmazsa mesaj yine kaydedilir)
+- ✅ SHA256 şifre hashleme
+- ✅ Otomatik kullanıcı oluşturma
+- ✅ Animasyonlu geçişler
+
+## 🗄️ Veritabanı Şeması
 
 ### Users
-- `POST /api/users` - Yeni kullanıcı kaydı (rumuz)
-- `GET /api/users` - Tüm kullanıcıları listele
-- `GET /api/users/{id}` - Belirli bir kullanıcıyı getir
+- `Id` (PK)
+- `Rumuz` (Unique)
+- `CreatedAt`
+
+### Rooms
+- `Id` (PK)
+- `Name` (Unique)
+- `PasswordHash`
+- `CreatedBy`
+- `CreatedAt`
+
+### RoomMembers
+- `Id` (PK)
+- `RoomId` (FK)
+- `Rumuz` (FK)
+- `JoinedAt`
 
 ### Messages
-- `POST /api/messages` - Yeni mesaj gönder (AI analizi ile)
-- `GET /api/messages` - Mesajları listele (sayfalama ile)
-- `GET /api/messages/{id}` - Belirli bir mesajı getir
+- `Id` (PK)
+- `Rumuz` (FK)
+- `RoomId` (FK)
+- `Text`
+- `SentimentLabel` (pozitif/nötr/negatif)
+- `SentimentScore` (0-1)
+- `CreatedAt`
 
-### Health
-- `GET /api/health` - API sağlık kontrolü
+## 🔐 Güvenlik
+
+- Oda şifreleri SHA256 ile hash'lenir
+- CORS politikası yapılandırılmış
+- SQL injection koruması (EF Core parametreli sorgular)
+- Input validasyonu tüm endpoint'lerde
 
 ## 🧪 Test
 
@@ -193,141 +330,96 @@ cd frontend
 npm test
 ```
 
+## 📱 APK Build (Android)
+
+```bash
+cd mobile/android
+./gradlew assembleRelease
+# APK: android/app/build/outputs/apk/release/app-release.apk
+```
+
+## 🚀 Deployment
+
+### Frontend (Vercel)
+1. Vercel hesabı oluşturun
+2. GitHub repository'yi bağlayın
+3. Root directory: `frontend`
+4. Build command: `npm run build`
+5. Output directory: `dist`
+6. Environment variables: `VITE_API_URL`
+
+### Backend (Render)
+1. Render hesabı oluşturun
+2. New Web Service oluşturun
+3. GitHub repository'yi bağlayın
+4. Root directory: `backend`
+5. Build command: `dotnet publish -c Release -o out`
+6. Start command: `dotnet out/backend.dll`
+
+### AI Service (Hugging Face Spaces)
+1. Hugging Face hesabı oluşturun
+2. New Space oluşturun (Gradio)
+3. `ai-service/` klasörünü upload edin
+4. Otomatik deploy olur
+
 ## 🤖 AI Araçları Kullanımı
 
-Bu projede aşağıdaki AI araçları kullanılmıştır:
+### Kiro AI
+- Proje yapısı oluşturma
+- Bileşen iskeletleri
+- Controller ve model yapıları
+- Routing ve navigation
 
-### Kiro AI Assistant
-- Proje yapısının oluşturulması
-- Kod iskeletlerinin hazırlanması
-- Test dosyalarının yazılması
-- Deployment dokümantasyonları
+### GitHub Copilot
+- CSS styling
+- LINQ sorguları
+- Boilerplate kod
+- Dokümantasyon
 
-### Elle Yazılan Kod Bölümleri
+### Elle Yazılan Kritik Kod
+1. **API Service Layer** - Tüm HTTP istekleri
+2. **Database Context** - İlişkiler ve konfigürasyon
+3. **Sentiment Service** - AI entegrasyonu
+4. **Polling Mechanism** - Gerçek zamanlı güncelleme
+5. **Password Hashing** - Güvenlik
+6. **Error Handling** - Hata yönetimi
 
-Aşağıdaki kritik kod bölümleri AI yardımı olmadan elle yazılmıştır:
+## 📊 Performans
 
-#### 1. Database Sorguları (backend/Controllers/)
+- Polling interval: 3 saniye
+- API response time: ~100-200ms
+- AI inference time: ~1-2 saniye
+- Database: SQLite (development), PostgreSQL önerilir (production)
 
-**UsersController.cs** - Kullanıcı sorgulama:
-```csharp
-// Önce bu rumuzun daha önce alınıp alınmadığını kontrol edelim
-var ayniRumuzluKullanici = await _context.Users
-    .Where(kullanici => kullanici.Rumuz == request.Rumuz)
-    .FirstOrDefaultAsync();
-```
+## 🐛 Bilinen Sorunlar
 
-**MessagesController.cs** - Mesaj sayfalama:
-```csharp
-// Sayfalama için kaç mesaj atlayacağımızı hesapla
-int atlanacakMesajSayisi = (page - 1) * pageSize;
+- Polling yerine WebSocket kullanılabilir (daha verimli)
+- AI servisi bazen yavaş olabilir (Hugging Face Spaces free tier)
+- Mobil uygulama background'da polling durur
 
-// Mesajları en eskiden en yeniye doğru sıralayıp, sayfalama uygula
-var mesajListesi = await _context.Messages
-    .OrderBy(mesaj => mesaj.CreatedAt)
-    .Skip(atlanacakMesajSayisi)
-    .Take(pageSize)
-    .ToListAsync();
-```
+## 🔮 Gelecek Geliştirmeler
 
-#### 2. AI Service Entegrasyonu (backend/Services/SentimentService.cs)
+- [ ] WebSocket/SignalR entegrasyonu
+- [ ] Kullanıcı "yazıyor..." göstergesi
+- [ ] Mesaj düzenleme/silme
+- [ ] Dosya paylaşımı
+- [ ] Emoji picker
+- [ ] Push notifications
+- [ ] Mesaj arama
+- [ ] Oda yöneticisi yetkileri
 
-HttpClient ile AI servisine istek atma mantığı:
-```csharp
-var response = await _httpClient.PostAsJsonAsync(_aiServiceUrl, requestData);
-var result = await response.Content.ReadFromJsonAsync<SentimentResponse>();
-```
+## 👥 Katkıda Bulunanlar
 
-#### 3. Frontend API Çağrıları (frontend/src/services/api.js)
-
-Axios ile backend'e istek gönderme:
-```javascript
-export const sendMessage = async (rumuz, text) => {
-  const response = await api.post('/api/messages', { rumuz, text });
-  return response.data;
-};
-```
-
-## 💡 Kod Hakimiyeti
-
-### Backend (Program.cs)
-Ana uygulama yapılandırması:
-- CORS ayarları
-- Dependency Injection
-- Database context
-- Swagger/OpenAPI
-- Middleware pipeline
-
-### Frontend (App.jsx)
-- React state yönetimi
-- Component lifecycle
-- API entegrasyonu
-- Routing mantığı
-
-### AI Service (app.py)
-- Gradio interface
-- Model yükleme
-- Sentiment analizi
-- Label mapping (İngilizce → Türkçe)
-
-## 🎨 Ekran Görüntüleri
-
-### Web Uygulaması
-![Web Login](docs/screenshots/web-login.png)
-![Web Chat](docs/screenshots/web-chat.png)
-
-### Mobil Uygulama
-![Mobile Login](docs/screenshots/mobile-login.png)
-![Mobile Chat](docs/screenshots/mobile-chat.png)
-
-## 🔧 Troubleshooting
-
-### Backend Çalışmıyor
-- .NET 8.0 SDK kurulu olduğundan emin olun
-- `dotnet --version` ile kontrol edin
-- Database migration'ları uygulandı mı: `dotnet ef database update`
-
-### Frontend Bağlanamıyor
-- Backend çalışıyor mu kontrol edin
-- `.env` dosyasında API URL doğru mu
-- CORS ayarları backend'de yapılandırıldı mı
-
-### AI Service Yanıt Vermiyor
-- Hugging Face Space uyuyor olabilir (ilk istek 30-60 saniye sürebilir)
-- Model yükleme süresi uzun olabilir
-- Backend timeout ayarlarını kontrol edin (5 saniye)
-
-### Mobile APK Kurulmuyor
-- "Bilinmeyen Kaynaklardan Yükleme" ayarı açık mı
-- Android 5.0 veya üzeri gerekli
-- Yeterli depolama alanı var mı
-
-## 📚 Öğrenilen Konular
-
-Bu proje ile şunları öğrendim:
-
-1. **Full-Stack Geliştirme**: React → .NET → Python AI zinciri
-2. **API Entegrasyonu**: RESTful API tasarımı ve kullanımı
-3. **Database Yönetimi**: Entity Framework Core ile CRUD işlemleri
-4. **AI/ML Entegrasyonu**: Hugging Face modellerinin kullanımı
-5. **Deployment**: Ücretsiz platformlarda (Vercel, Render, HF Spaces) deployment
-6. **Mobile Development**: React Native ile cross-platform uygulama
-7. **Testing**: Unit test ve integration test yazımı
-8. **Error Handling**: Graceful degradation ve timeout yönetimi
-
-## 🤝 Katkıda Bulunma
-
-Bu proje eğitim amaçlı geliştirilmiştir. Önerileriniz için issue açabilirsiniz.
+Bu proje, AI destekli geliştirme araçları (Kiro AI, GitHub Copilot) kullanılarak geliştirilmiştir. Kritik iş mantığı ve güvenlik katmanları elle yazılmıştır.
 
 ## 📄 Lisans
 
-Bu proje MIT lisansı altında lisanslanmıştır.
+MIT License
 
-## 👤 Geliştirici
+## 📞 İletişim
 
-**Mete Karasubasi**
-- GitHub: [@MeteKarasubasi](https://github.com/MeteKarasubasi)
+Sorularınız için issue açabilirsiniz.
 
 ---
 
-**Not**: Bu proje, AI araçları ile kod üretme ve full-stack development yeteneklerini göstermek amacıyla geliştirilmiştir. Kritik kod bölümleri (DB sorguları, API çağrıları) elle yazılarak kod hakimiyeti kanıtlanmıştır.
+**Not:** Bu proje eğitim amaçlıdır. Production kullanımı için ek güvenlik önlemleri alınmalıdır.

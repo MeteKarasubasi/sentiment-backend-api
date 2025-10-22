@@ -5,10 +5,47 @@
   margin-bottom: 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: box-shadow 0.2s;
+  max-width: 70%;
+  animation: slideIn 0.2s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .message-item:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Own messages - aligned to the right with different color */
+.message-item.own-message {
+  margin-left: auto;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.message-item.own-message .message-rumuz {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.message-item.own-message .message-time {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.message-item.own-message .message-text {
+  color: white;
+}
+
+/* Other users' messages - aligned to the left */
+.message-item.other-message {
+  margin-right: auto;
 }
 
 .message-header {

@@ -1,7 +1,8 @@
 import './MessageItem.css';
 
-function MessageItem({ message }) {
+function MessageItem({ message, currentUserRumuz }) {
   const { rumuz, text, sentimentLabel, sentimentScore, createdAt } = message;
+  const isOwnMessage = rumuz === currentUserRumuz;
 
   // Get sentiment badge class based on label
   const getSentimentClass = () => {
@@ -23,7 +24,7 @@ function MessageItem({ message }) {
   };
 
   return (
-    <div className="message-item">
+    <div className={`message-item ${isOwnMessage ? 'own-message' : 'other-message'}`}>
       <div className="message-header">
         <span className="message-rumuz">{rumuz}</span>
         <span className="message-time">{formatTime(createdAt)}</span>

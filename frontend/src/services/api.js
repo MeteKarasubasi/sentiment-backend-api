@@ -24,24 +24,56 @@ export const api = {
   },
 
   /**
-   * Send a new message
-   * @param {string} rumuz - The username sending the message
-   * @param {string} text - The message text
-   * @returns {Promise} Response with message data including sentiment
+   * Create a new room
+   * @param {string} name - Room name
+   * @param {string} password - Room password
+   * @param {string} createdBy - Username creating the room
+   * @returns {Promise} Response with room data
    */
-  sendMessage: (rumuz, text) => {
-    return apiClient.post('/api/messages', { rumuz, text });
+  createRoom: (name, password, createdBy) => {
+    return apiClient.post('/api/rooms', { name, password, createdBy });
   },
 
   /**
-   * Get all messages with optional pagination
+   * Join an existing room
+   * @param {string} name - Room name
+   * @param {string} password - Room password
+   * @param {string} rumuz - Username joining the room
+   * @returns {Promise} Response with room data
+   */
+  joinRoom: (name, password, rumuz) => {
+    return apiClient.post('/api/rooms/join', { name, password, rumuz });
+  },
+
+  /**
+   * Get all available rooms
+   * @returns {Promise} Response with array of rooms
+   */
+  getRooms: () => {
+    return apiClient.get('/api/rooms');
+  },
+
+  /**
+   * Send a new message
+   * @param {string} rumuz - The username sending the message
+   * @param {string} text - The message text
+   * @param {number} roomId - The room ID
+   * @returns {Promise} Response with message data including sentiment
+   */
+  sendMessage: (rumuz, text, roomId) => {
+    return apiClient.post('/api/messages', { rumuz, text, roomId });
+  },
+
+  /**
+   * Get messages from a specific room with optional pagination
+   * @param {number} roomId - Room ID
    * @param {number} page - Page number (default: 1)
    * @param {number} pageSize - Number of messages per page (default: 50)
    * @returns {Promise} Response with array of messages
    */
-  getMessages: (page = 1, pageSize = 50) => {
+  getMessages: (roomId, page = 1, pageSize = 50) => {
     return apiClient.get('/api/messages', {
-      params: { page, pageSize },
+      params: { roomId, page, pageSize },
     });
   },
 
