@@ -1,0 +1,15 @@
+**/.git
+**/.gitignore
+**/.vs
+**/.vscode
+**/bin
+**/obj
+**/*.db
+**/*.db-shm
+**/*.db-wal
+**/out
+**/.DS_Store
+**/node_modules
+**/*.md
+**/test_render_api.ps1
+**/test_render_api.sh

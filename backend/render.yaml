@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: sentiment-chat-backend
+    env: dotnet
+    buildCommand: dotnet publish -c Release -o out
+    startCommand: dotnet out/backend.dll
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ASPNETCORE_URLS
+        value: http://0.0.0.0:$PORT
+      - key: AiService__Url
+        sync: false
+      - key: ConnectionStrings__DefaultConnection
+        value: Data Source=/var/data/chat.db
+    disk:
+      name: chat-data
+      mountPath: /var/data
+      sizeGB: 1
