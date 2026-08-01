@@ -59,3 +59,9 @@ Thumbs.db
 *.tmp
 *.bak
 *~
+
+.env
+.env.*
+bin/
+obj/
+appsettings.Development.json
